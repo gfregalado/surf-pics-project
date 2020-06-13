@@ -4,14 +4,14 @@ import classes from './Navbar.module.css';
 const navbar = () => {
   return (
     <div className={classes.Navbar}>
-      <div>
+      <div className={classes.Links}>
         <ul>
           <li>Link 1</li>
           <li>Link 2</li>
         </ul>
       </div>
-      <img src="" alt="" />
-      <div>
+      <h3 className={classes.Logo}>SURFPICPROJECT</h3>
+      <div className={classes.Buttons}>
         {/* To be replaced with components*/}
         <button>Signup</button>
         <button>Login</button>
