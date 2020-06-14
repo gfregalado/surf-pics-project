@@ -1,0 +1,19 @@
+button {
+  border: solid 2px black;
+  width: 110px;
+  height: 30px;
+  border-radius: 5px;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.Primary {
+  color: whitesmoke;
+  background-color: black;
+}
+
+.Secondary {
+  color: black;
+}

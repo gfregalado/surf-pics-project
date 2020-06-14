@@ -15,12 +15,30 @@
 }
 
 form {
+  display: flexbox;
   margin: auto;
-  width: 40%;
-  height: 100%;
+  width: 60%;
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+h2 {
+  margin: 12% 0;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+input {
+  border: none;
+  padding: 7px;
+}
+
+label {
+  text-align: left;
+  margin: 25px 0 5px 0;
+  font-weight: 300;
+  text-transform: uppercase;
 }
 
 .ImagePhotographer {
@@ -28,6 +46,7 @@ form {
   height: 100%;
   background-image: url('../../../Assets/Images/photographer.jpg');
   background-size: cover;
+  transition: opacity 3s ease-in-out;
 }
 
 .ImageSurfer {
