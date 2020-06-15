@@ -1,14 +1,12 @@
 import React from 'react';
 import Navbar from '../../Components/Navigation/Navbar';
-import HeroBanner from '../../Components/LandingPage/HeroBanner/HeroBanner';
-import Signup from '../Authentication/Signup/Signup';
+import HeroBanner from './HeroBanner/HeroBanner';
 
 const landingPage = () => {
   return (
     <React.Fragment>
       <Navbar />
       <HeroBanner />
-      <Signup></Signup>
     </React.Fragment>
   );
 };

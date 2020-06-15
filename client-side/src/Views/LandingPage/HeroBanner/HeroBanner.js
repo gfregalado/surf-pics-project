@@ -1,6 +1,6 @@
 import React from 'react';
 import Classes from './HeroBanner.module.css';
-import Button from '../../UI/Buttons/Button';
+import Button from '../../../Components/UI/Buttons/Button';
 import { Link } from 'react-router-dom';
 
 const navbar = () => {
