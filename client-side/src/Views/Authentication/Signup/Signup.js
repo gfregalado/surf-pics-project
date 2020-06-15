@@ -3,6 +3,8 @@ import Classes from './Signup.module.css';
 import CustomSwitch from '../../../Components/UI/Switch/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Button from '../../../Components/UI/Buttons/Button';
+import surfIcon from '../../../Assets/Icons/surf-equipment.svg';
+import photoIcon from '../../../Assets/Icons/photo-camera.svg';
 
 class Signup extends Component {
   state = {
@@ -43,17 +45,28 @@ class Signup extends Component {
               <label For="password">Password</label>
               <input type="password" name="password"></input>
 
-              <FormControlLabel
-                control={
-                  <CustomSwitch
-                    checked={this.state.userType}
-                    onChange={this.handleImageChange}
-                    name="userType"
-                  />
-                }
-              />
+              <div className={Classes.Switch}>
+                <img
+                  src={photoIcon}
+                  alt="surfIcon"
+                  width="40px"
+                  style={{ paddingRight: '27px' }}
+                />
+                <FormControlLabel
+                  control={
+                    <CustomSwitch
+                      checked={this.state.userType}
+                      onChange={this.handleImageChange}
+                      name="userType"
+                    />
+                  }
+                />
+                <img src={surfIcon} alt="surfIcon" width="40px" />
+              </div>
             </form>
-            <Button>Create Account</Button>
+            <div className={Classes.Button}>
+              <Button>Create Account</Button>
+            </div>
           </div>
           <div className={this.ImageDisplayed}></div>
         </div>

@@ -1,7 +1,7 @@
 .SignupBox {
   display: flex;
-  margin: 10vh auto;
-  width: 70%;
+  margin: 7vh auto;
+  width: 85%;
   height: 80vh;
   background-color: whitesmoke;
   -webkit-box-shadow: 20px 20px 55px -20px rgba(0, 0, 0, 0.75);
@@ -10,21 +10,26 @@
 }
 
 .Form {
-  width: 50%;
+  width: 100%;
   height: 100%;
+}
+
+.Button {
+  width: 70%;
+  margin: auto;
 }
 
 form {
   display: flexbox;
   margin: auto;
-  width: 60%;
+  width: 70%;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
 h2 {
-  margin: 12% 0;
+  margin: 12% 0 6% 0;
   text-transform: uppercase;
   font-weight: 400;
 }
@@ -42,15 +47,48 @@ label {
 }
 
 .ImagePhotographer {
-  width: 50%;
-  height: 100%;
-  background-image: url('../../../Assets/Images/photographer.jpg');
-  background-size: cover;
-  transition: opacity 3s ease-in-out;
+  display: none;
 }
 
 .ImageSurfer {
-  width: 50%;
-  background-image: url('../../../Assets/Images/surfer.jpg');
-  background-size: cover;
+  display: none;
+}
+
+.Switch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 30px;
+  margin: 0 30px 20px 0;
+}
+
+.Switch img {
+  padding-top: 20px;
+}
+
+@media screen and (min-device-width: 1024px) and (max-device-width: 1600px) and (-webkit-min-device-pixel-ratio: 1) {
+  .SignupBox {
+    margin: 7vh auto;
+    width: 70%;
+  }
+
+  .Form {
+    width: 50%;
+  }
+
+  .ImagePhotographer {
+    display: initial;
+    width: 50%;
+    height: 100%;
+    background-image: url('../../../Assets/Images/photographer.jpg');
+    background-size: cover;
+    transition: opacity 3s ease-in-out;
+  }
+
+  .ImageSurfer {
+    display: initial;
+    width: 50%;
+    background-image: url('../../../Assets/Images/surfer.jpg');
+    background-size: cover;
+  }
 }

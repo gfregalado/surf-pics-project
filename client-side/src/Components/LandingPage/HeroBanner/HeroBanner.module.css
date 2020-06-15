@@ -66,6 +66,7 @@
   }
 
   .Header h1 {
+    display: initial;
     margin-top: 100px;
     font-weight: 400;
   }
@@ -84,8 +85,15 @@
   }
 
   .Header h1 {
-    margin-top: 200px;
+    margin-top: 150px;
     font-weight: 400;
+  }
+
+  .Header h3 {
+    margin: 20px 0 20px 0;
+    width: 100%;
+    font-weight: 300;
+    letter-spacing: 3px;
   }
 
   .Description h3 {
