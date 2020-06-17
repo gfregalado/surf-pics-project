@@ -28,7 +28,19 @@ h2 {
   display: none;
 }
 
-@media screen and (min-device-width: 1024px) and (max-device-width: 1600px) and (-webkit-min-device-pixel-ratio: 1) {
+.Switch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 30px;
+  margin: 0 30px 20px 0;
+}
+
+.Switch img {
+  padding-top: 20px;
+}
+
+@media screen and (min-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
   .SignupBox {
     margin: 7vh auto;
     width: 70%;
