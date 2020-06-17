@@ -1,11 +1,11 @@
 let firebaseConfig = {
-  apiKey: 'AIzaSyDnOubc88oZEID5C5KsGH5fgTRM7HHy3OM',
-  authDomain: 'surf-pics-project.firebaseapp.com',
-  databaseURL: 'https://surf-pics-project.firebaseio.com',
-  projectId: 'surf-pics-project',
-  storageBucket: 'surf-pics-project.appspot.com',
-  messagingSenderId: '397547821145',
-  appId: '1:397547821145:web:ba8277f77eb9a7f190b948',
-  measurementId: 'G-JWN8XH1PEE',
+  apiKey: `${process.env.REACT_APP_FIREBASE_API_KEY}`,
+  authDomain: 'surf-pic-project.firebaseapp.com',
+  databaseURL: 'https://surf-pic-project.firebaseio.com',
+  projectId: 'surf-pic-project',
+  storageBucket: 'surf-pic-project.appspot.com',
+  messagingSenderId: '235753154623',
+  appId: '1:235753154623:web:f35cd1e85447383513308a',
+  measurementId: 'G-30P1MW5KQT',
 };
 export default firebaseConfig;

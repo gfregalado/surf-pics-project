@@ -3,8 +3,6 @@ import Classes from './Signup.module.css';
 import { Form, Input, Radio } from 'antd';
 import Button from '../../../Components/UI/Buttons/Button';
 
-import { useHistory } from 'react-router-dom';
-
 class Signup extends Component {
   state = {
     userType: 'surfer',
