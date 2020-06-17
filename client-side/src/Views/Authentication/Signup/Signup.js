@@ -3,19 +3,19 @@ import Classes from './Signup.module.css';
 import { Form, Input, Radio } from 'antd';
 import Button from '../../../Components/UI/Buttons/Button';
 
+import { useHistory } from 'react-router-dom';
+
 class Signup extends Component {
   state = {
     userType: 'surfer',
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
   };
 
   // ========================== Handles form input changes & submission  ==========================
 
   onSubmit = (values) => {
     console.log('Received values of form: ', values);
+    const { email, password } = values;
+    this.props.createNewFirebaseUser(email, password);
   };
 
   // ========================== Handles the image change when pressing the switch  ==========================

@@ -9,19 +9,39 @@ import firebase from 'firebase';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      loggedInUser: null,
+    };
   }
   componentDidMount() {
-    firebase.initializeApp({
-      FirebaseSDK,
-    });
+    firebase.initializeApp(FirebaseSDK);
   }
+
+  createNewFirebaseUser = async (email, password) => {
+    try {
+      let resp = await firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password);
+      this.setState({ loggedInUser: resp.user });
+    } catch (error) {
+      alert(error);
+    }
+  };
 
   render() {
     return (
       <Switch>
         <Route path="/" exact component={LandingPage} />
-        <Route path="/Signup" component={Signup} />
+        <Route
+          exact
+          path="/signup"
+          render={(props) => (
+            <Signup
+              createNewFirebaseUser={this.createNewFirebaseUser}
+              {...props}
+            />
+          )}
+        />
       </Switch>
     );
   }
