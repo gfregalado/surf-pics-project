@@ -6,14 +6,18 @@ import Button from '../../../Components/UI/Buttons/Button';
 class Signup extends Component {
   state = {
     userType: 'surfer',
+    redirect: false,
   };
 
   // ========================== Handles form input changes & submission  ==========================
 
-  onSubmit = (values) => {
-    console.log('Received values of form: ', values);
-    const { email, password } = values;
-    this.props.createNewFirebaseUser(email, password);
+  onSubmit = async (values) => {
+    try {
+      const { email, password } = values;
+      this.props.createNewFirebaseUser(email, password);
+    } catch (error) {
+      alert(error);
+    }
   };
 
   // ========================== Handles the image change when pressing the switch  ==========================

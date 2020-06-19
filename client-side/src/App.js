@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import './App.css';
 import LandingPage from './Views/LandingPage/LandingPage';
 import Signup from './Views/Authentication/Signup/Signup';
@@ -21,8 +21,10 @@ class App extends Component {
     try {
       let resp = await firebase
         .auth()
-        .createUserWithEmailAndPassword(email, password);
-      this.setState({ loggedInUser: resp.user });
+        .createUserWithEmailAndPassword(email, password)
+        .then(() => {
+          this.props.history.push('/');
+        });
     } catch (error) {
       alert(error);
     }
@@ -47,4 +49,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);
