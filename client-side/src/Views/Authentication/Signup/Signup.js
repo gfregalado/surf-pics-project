@@ -5,7 +5,6 @@ import { Form, Input, Radio, Button } from 'antd';
 class Signup extends Component {
   state = {
     userType: 'surfer',
-    redirect: false,
   };
 
   // ========================== Handles form input changes & submission  ==========================

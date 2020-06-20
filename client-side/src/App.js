@@ -5,6 +5,7 @@ import LandingPage from './Views/LandingPage/LandingPage';
 import Signup from './Views/Authentication/Signup/Signup';
 import FirebaseSDK from './Services/Firebase';
 import firebase from 'firebase';
+import Login from './Views/Authentication/Login/Login';
 
 class App extends Component {
   constructor(props) {
@@ -44,6 +45,7 @@ class App extends Component {
             />
           )}
         />
+        <Route exact path="/login" render={(props) => <Login {...props} />} />
       </Switch>
     );
   }
