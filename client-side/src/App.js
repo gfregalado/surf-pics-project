@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
-import './App.css';
+import './App.less';
 import LandingPage from './Views/LandingPage/LandingPage';
 import Signup from './Views/Authentication/Signup/Signup';
 import FirebaseSDK from './Services/Firebase';
@@ -19,7 +19,7 @@ class App extends Component {
 
   createNewFirebaseUser = async (email, password) => {
     try {
-      let resp = await firebase
+      await firebase
         .auth()
         .createUserWithEmailAndPassword(email, password)
         .then(() => {

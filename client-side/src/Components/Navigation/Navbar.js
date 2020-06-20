@@ -1,6 +1,6 @@
 import React from 'react';
 import Classes from './Navbar.module.css';
-import Button from '../UI/Buttons/Button';
+import { Button, Space } from 'antd';
 import { Link } from 'react-router-dom';
 
 const navbar = () => {
@@ -13,12 +13,12 @@ const navbar = () => {
         </ul>
       </div>
       <h3 className={Classes.Logo}>SURFPICPROJECT</h3>
-      <div className={Classes.Buttons}>
+      <Space size="large">
         <Link to="/signup">
           <Button>Signup</Button>
         </Link>
-        <Button buttonSecondary>Login</Button>
-      </div>
+        <Button type="primary">Login</Button>
+      </Space>
     </div>
   );
 };

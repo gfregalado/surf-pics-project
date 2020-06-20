@@ -20,24 +20,17 @@
 }
 
 @media screen and (min-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+  .Navbar {
+    width: 95%;
+    margin: auto;
+  }
+
   li {
     display: inline;
   }
 
   .Links {
-    width: 25%;
     display: flex;
-  }
-
-  .Buttons {
-    margin: 0;
-    width: 25%;
-    display: flex;
-    flex-direction: row-reverse;
-  }
-
-  .Navbar button {
-    margin: 20px;
   }
 
   .Logo {

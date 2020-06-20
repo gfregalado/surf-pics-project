@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Classes from './Signup.module.css';
-import { Form, Input, Radio } from 'antd';
-import Button from '../../../Components/UI/Buttons/Button';
+import { Form, Input, Radio, Button } from 'antd';
 
 class Signup extends Component {
   state = {
@@ -119,10 +118,15 @@ class Signup extends Component {
               </Form.Item>
 
               <Form.Item>
-                <Button htmlFor="submit" className="login-form-button">
+                <Button
+                  htmlFor="submit"
+                  className="login-form-button"
+                  type="primary"
+                >
                   Create Account
                 </Button>
               </Form.Item>
+              <span>Already have an account? Go to Login</span>
             </Form>
           </div>
           <div className={this.ImageDisplayed}></div>
