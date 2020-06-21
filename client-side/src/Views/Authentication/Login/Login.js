@@ -2,11 +2,11 @@ import React from 'react';
 import { Form, Input, Button } from 'antd';
 import Classes from './Login.module.css';
 
-const Login = () => {
+const Login = (props) => {
   const onSubmit = async (values) => {
     try {
       const { email, password } = values;
-      console.log('TEST' + email + password);
+      props.loginFirebaseUser(email, password);
     } catch (error) {
       alert(error);
     }

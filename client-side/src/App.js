@@ -32,6 +32,17 @@ class App extends Component {
     }
   };
 
+  loginFirebaseUser = (email, password) => {
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then((resp) => {
+        console.log(resp);
+        this.props.history.push('/');
+      })
+      .catch((err) => alert(err));
+  };
+
   render() {
     return (
       <Switch>
@@ -46,7 +57,13 @@ class App extends Component {
             />
           )}
         />
-        <Route exact path="/login" render={(props) => <Login {...props} />} />
+        <Route
+          exact
+          path="/login"
+          render={(props) => (
+            <Login loginFirebaseUser={this.loginFirebaseUser} {...props} />
+          )}
+        />
       </Switch>
     );
   }
