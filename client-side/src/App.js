@@ -23,7 +23,8 @@ class App extends Component {
       await firebase
         .auth()
         .createUserWithEmailAndPassword(email, password)
-        .then(() => {
+        .then((resp) => {
+          console.log(resp);
           this.props.history.push('/');
         });
     } catch (error) {

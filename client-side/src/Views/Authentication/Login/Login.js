@@ -4,7 +4,6 @@ import Classes from './Login.module.css';
 
 const Login = () => {
   const onSubmit = async (values) => {
-    console.log('TEST');
     try {
       const { email, password } = values;
       console.log('TEST' + email + password);

@@ -39,7 +39,8 @@ class Signup extends Component {
           <div className={Classes.Form}>
             <h2>Ready to join the Community?</h2>
             <Form
-              className="login-form"
+              name="signup"
+              className="signup-form"
               initialValues={{ userType: 'surfer' }}
               onFinish={this.onSubmit}
               style={{
@@ -106,11 +107,7 @@ class Signup extends Component {
                   },
                 ]}
               >
-                <Radio.Group
-                  defaultValue="surfer"
-                  onChange={this.handleImageChange}
-                  name="userType"
-                >
+                <Radio.Group onChange={this.handleImageChange} name="userType">
                   <Radio value="surfer">Surfer</Radio>
                   <Radio value="photographer">Photographer</Radio>
                 </Radio.Group>
@@ -118,8 +115,8 @@ class Signup extends Component {
 
               <Form.Item>
                 <Button
-                  htmlFor="submit"
-                  className="login-form-button"
+                  htmlType="submit"
+                  className="signup-form-button"
                   type="primary"
                 >
                   Create Account
