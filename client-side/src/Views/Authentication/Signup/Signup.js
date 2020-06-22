@@ -11,8 +11,14 @@ class Signup extends Component {
 
   onSubmit = async (values) => {
     try {
-      const { email, password } = values;
-      this.props.createNewFirebaseUser(email, password);
+      const { email, password, firstName, lastName, userType } = values;
+      this.props.createNewFirebaseUser(
+        email,
+        password,
+        firstName,
+        lastName,
+        userType
+      );
     } catch (error) {
       alert(error);
     }

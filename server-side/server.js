@@ -5,11 +5,12 @@ require('dotenv').config();
 const debug = require('debug')('server-side:server');
 const app = require('./app');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 const PORT = parseInt(process.env.PORT, 10);
 const URI = process.env.MONGODB_URI;
 
-const terminate = error => {
+const terminate = (error) => {
   if (error) debug(error);
   const exitCode = error && error instanceof Error ? 1 : 0;
   debug('Terminating node app.');
@@ -21,16 +22,16 @@ const terminate = error => {
 
 process.on('SIGINT', () => terminate());
 process.on('SIGTERM', () => terminate());
-process.on('uncaughtException', error => {
+process.on('uncaughtException', (error) => {
   debug('There was an uncaught exception.');
   terminate(error);
 });
-process.on('unhandledRejection', error => {
+process.on('unhandledRejection', (error) => {
   debug('There was an unhandled promise rejection.');
   terminate(error);
 });
 
-const onError = error => {
+const onError = (error) => {
   const { syscall, port, code } = error;
   if (syscall === 'listen' && code === 'EADDRINUSE') {
     console.error(`Port ${port} is already in use`);
@@ -42,7 +43,7 @@ const onError = error => {
   }
 };
 
-const onListening = server => {
+const onListening = (server) => {
   const { port } = server.address();
   debug(`Node server listening on ${port}`);
   if (process.env.NODE_ENV === 'development')
@@ -53,21 +54,29 @@ const initiate = () => {
   app.set('port', PORT);
 
   const server = app.listen(PORT);
-  server.on('error', error => onError(error));
+  server.on('error', (error) => onError(error));
   server.on('listening', () => onListening(server));
 };
+
+app.use(
+  cors({
+    // credentials: true,
+    origin: ['http://localhost:3000'],
+    Vary: 'Origin',
+  })
+);
 
 mongoose
   .connect(URI, {
     useNewUrlParser: true,
     useCreateIndex: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
   })
   .then(() => {
     debug(`Database connected to URI "${URI}"`);
     initiate();
   })
-  .catch(error => {
+  .catch((error) => {
     console.error(`There was an error connecting the database to URI "${URI}"`);
     debug(error);
     process.exit(1);
