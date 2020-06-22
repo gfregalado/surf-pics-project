@@ -3,9 +3,12 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 import './App.less';
 import LandingPage from './Views/LandingPage/LandingPage';
 import Signup from './Views/Authentication/Signup/Signup';
+import Login from './Views/Authentication/Login/Login';
+import Upload from './Views/Upload/Upload';
+
 import FirebaseSDK from './Services/Firebase';
 import firebase from 'firebase';
-import Login from './Views/Authentication/Login/Login';
+
 import { createUser } from './Services/authentication';
 
 class App extends Component {
@@ -33,8 +36,9 @@ class App extends Component {
         //Creates the user in Firebase
         .createUserWithEmailAndPassword(email, password)
         .then(() => {
-          //Creates the user in MongoDB
+          //Creates the user in MongoDB & Updates state
           createUser(email, firstName, lastName, userType);
+          this.setState({ loggedInUser: true });
           this.props.history.push('/');
         })
         .catch((error) => console.log(error));
@@ -49,6 +53,7 @@ class App extends Component {
       .signInWithEmailAndPassword(email, password)
       .then((resp) => {
         console.log(resp);
+        this.setState({ loggedInUser: true });
         this.props.history.push('/');
       })
       .catch((err) => alert(err));
@@ -57,7 +62,13 @@ class App extends Component {
   render() {
     return (
       <Switch>
-        <Route path="/" exact component={LandingPage} />
+        <Route
+          path="/"
+          exact
+          render={(props) => (
+            <LandingPage loggedInUser={this.state.loggedInUser} {...props} />
+          )}
+        />
         <Route
           exact
           path="/signup"
@@ -75,6 +86,7 @@ class App extends Component {
             <Login loginFirebaseUser={this.loginFirebaseUser} {...props} />
           )}
         />
+        <Route exact path="/upload" render={(props) => <Upload {...props} />} />
       </Switch>
     );
   }

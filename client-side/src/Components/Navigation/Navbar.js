@@ -1,34 +1,61 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Classes from './Navbar.module.css';
-import { Button, Space } from 'antd';
+import { Button, Space, Avatar, Menu } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 
-const navbar = () => {
-  return (
-    <div className={Classes.Navbar}>
-      <div className={Classes.Links}>
-        <ul>
-          <Space size="large">
-            <Link>
-              <li>Browse</li>
-            </Link>
-            <Link>
-              <li>Upload</li>
-            </Link>
-          </Space>
-        </ul>
-      </div>
-      <h3 className={Classes.Logo}>SURFPICPROJECT</h3>
-      <Space size="large">
-        <Link to="/signup">
-          <Button>Signup</Button>
-        </Link>
-        <Link to="/login">
-          <Button type="primary">Login</Button>
-        </Link>
-      </Space>
-    </div>
-  );
-};
+class Navbar extends Component {
+  state = {
+    current: 'mail',
+  };
 
-export default navbar;
+  buttons = !this.props.loggedInUser ? (
+    <Space size="large">
+      <Link to="/signup">
+        <Button>Signup</Button>
+      </Link>
+      <Link to="/login">
+        <Button type="primary">Login</Button>
+      </Link>
+    </Space>
+  ) : (
+    <Space size="large">
+      <Menu
+        onClick={this.handleClick}
+        selectedKeys={[this.state.current]}
+        mode="horizontal"
+        style={{ backgroundColor: '#f5f5f5' }}
+      >
+        <Menu.Item key="browse">
+          Browse Pictures
+          <Link to="/" />
+        </Menu.Item>
+        <Menu.Item key="upload">
+          Upload Pictures
+          <Link to="/upload" />
+        </Menu.Item>
+      </Menu>
+      <Avatar style={{ backgroundColor: '#000000' }} icon={<UserOutlined />} />
+    </Space>
+  );
+
+  // Handling Click for Navbar items
+
+  handleClick = (e) => {
+    console.log('click ', e);
+    this.setState({
+      current: e.key,
+    });
+  };
+
+  render() {
+    return (
+      <div className={Classes.Navbar}>
+        <h3 className={Classes.Logo}>SURFPICPROJECT</h3>
+        {this.buttons}
+      </div>
+    );
+  }
+}
+
+export default Navbar;
