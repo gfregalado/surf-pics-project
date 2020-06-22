@@ -6,7 +6,7 @@ import Signup from './Views/Authentication/Signup/Signup';
 import FirebaseSDK from './Services/Firebase';
 import firebase from 'firebase';
 import Login from './Views/Authentication/Login/Login';
-import Axios from 'axios';
+import { createUser } from './Services/authentication';
 
 class App extends Component {
   constructor(props) {
@@ -30,21 +30,14 @@ class App extends Component {
     try {
       await firebase
         .auth()
+        //Creates the user in Firebase
         .createUserWithEmailAndPassword(email, password)
-        .then((resp) => {
-          console.log(resp);
-          Axios.post('http://localhost:5000/api/createUser', {
-            email,
-            firstName,
-            lastName,
-            userType,
-          })
-            .then(() => {
-              this.props.history.push('/');
-              console.log('USER CREATED SUCCESSFULLY');
-            })
-            .catch((error) => console.log(error));
-        });
+        .then(() => {
+          //Creates the user in MongoDB
+          createUser(email, firstName, lastName, userType);
+          this.props.history.push('/');
+        })
+        .catch((error) => console.log(error));
     } catch (error) {
       alert(error);
     }
