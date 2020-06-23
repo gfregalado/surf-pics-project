@@ -22,7 +22,7 @@ class Navbar extends Component {
 
   componentDidUpdate() {
     console.log('LOOP?');
-    if (this.props.loggedInUser) {
+    if (this.props.user) {
       this.buttonsDisplay = (
         <Space size="large">
           <Menu

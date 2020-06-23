@@ -7,7 +7,7 @@ import Signup from './Views/Authentication/Signup/Signup';
 import Login from './Views/Authentication/Login/Login';
 import Upload from './Views/Upload/Upload';
 
-import FirebaseSDK from './Services/Firebase';
+import { firebaseConfig } from './Services/Firebase';
 import firebase from 'firebase';
 
 import { createUser } from './Services/authentication';
@@ -16,12 +16,12 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loggedInUser: null,
+      user: null,
     };
   }
 
   componentDidMount() {
-    firebase.initializeApp(FirebaseSDK);
+    firebase.initializeApp(firebaseConfig);
   }
 
   createNewFirebaseUser = async (
@@ -39,7 +39,7 @@ class App extends Component {
         .then(() => {
           //Creates the user in MongoDB & Updates state
           createUser(email, firstName, lastName, userType);
-          this.setState({ loggedInUser: true });
+          this.setState({ user: true });
           this.props.history.push('/');
         })
         .catch((error) => console.log(error));
@@ -54,7 +54,7 @@ class App extends Component {
       .signInWithEmailAndPassword(email, password)
       .then((resp) => {
         console.log(resp);
-        this.setState({ loggedInUser: true });
+        this.setState({ user: true });
         this.props.history.push('/');
       })
       .catch((err) => alert(err));
@@ -63,13 +63,13 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <Navbar loggedInUser={this.state.loggedInUser} />
+        <Navbar user={this.state.user} />
         <Switch>
           <Route
             path="/"
             exact
             render={(props) => (
-              <LandingPage loggedInUser={this.state.loggedInUser} {...props} />
+              <LandingPage user={this.state.user} {...props} />
             )}
           />
           <Route
