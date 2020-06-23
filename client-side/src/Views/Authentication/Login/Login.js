@@ -18,7 +18,6 @@ const Login = (props) => {
 
   return (
     <React.Fragment>
-      <h3 className={Classes.Logo}>SURFPICPROJECT</h3>
       <div className={Classes.LoginBox}>
         <div className={Classes.Form}>
           <h2>Good to see you again!</h2>

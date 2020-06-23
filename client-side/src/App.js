@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import './App.less';
+import Navbar from './Components/Navigation/Navbar';
 import LandingPage from './Views/LandingPage/LandingPage';
 import Signup from './Views/Authentication/Signup/Signup';
 import Login from './Views/Authentication/Login/Login';
@@ -61,33 +62,40 @@ class App extends Component {
 
   render() {
     return (
-      <Switch>
-        <Route
-          path="/"
-          exact
-          render={(props) => (
-            <LandingPage loggedInUser={this.state.loggedInUser} {...props} />
-          )}
-        />
-        <Route
-          exact
-          path="/signup"
-          render={(props) => (
-            <Signup
-              createNewFirebaseUser={this.createNewFirebaseUser}
-              {...props}
-            />
-          )}
-        />
-        <Route
-          exact
-          path="/login"
-          render={(props) => (
-            <Login loginFirebaseUser={this.loginFirebaseUser} {...props} />
-          )}
-        />
-        <Route exact path="/upload" render={(props) => <Upload {...props} />} />
-      </Switch>
+      <React.Fragment>
+        <Navbar loggedInUser={this.state.loggedInUser} />
+        <Switch>
+          <Route
+            path="/"
+            exact
+            render={(props) => (
+              <LandingPage loggedInUser={this.state.loggedInUser} {...props} />
+            )}
+          />
+          <Route
+            exact
+            path="/signup"
+            render={(props) => (
+              <Signup
+                createNewFirebaseUser={this.createNewFirebaseUser}
+                {...props}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/login"
+            render={(props) => (
+              <Login loginFirebaseUser={this.loginFirebaseUser} {...props} />
+            )}
+          />
+          <Route
+            exact
+            path="/upload"
+            render={(props) => <Upload {...props} />}
+          />
+        </Switch>
+      </React.Fragment>
     );
   }
 }

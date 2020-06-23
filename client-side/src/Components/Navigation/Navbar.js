@@ -6,10 +6,10 @@ import { Link } from 'react-router-dom';
 
 class Navbar extends Component {
   state = {
-    current: 'mail',
+    current: null,
   };
 
-  buttons = !this.props.loggedInUser ? (
+  buttonsDisplay = (
     <Space size="large">
       <Link to="/signup">
         <Button>Signup</Button>
@@ -18,31 +18,39 @@ class Navbar extends Component {
         <Button type="primary">Login</Button>
       </Link>
     </Space>
-  ) : (
-    <Space size="large">
-      <Menu
-        onClick={this.handleClick}
-        selectedKeys={[this.state.current]}
-        mode="horizontal"
-        style={{ backgroundColor: '#f5f5f5' }}
-      >
-        <Menu.Item key="browse">
-          Browse Pictures
-          <Link to="/" />
-        </Menu.Item>
-        <Menu.Item key="upload">
-          Upload Pictures
-          <Link to="/upload" />
-        </Menu.Item>
-      </Menu>
-      <Avatar style={{ backgroundColor: '#000000' }} icon={<UserOutlined />} />
-    </Space>
   );
 
+  componentDidUpdate() {
+    console.log('LOOP?');
+    if (this.props.loggedInUser) {
+      this.buttonsDisplay = (
+        <Space size="large">
+          <Menu
+            onClick={this.handleClick}
+            selectedKeys={this.state.current}
+            mode="horizontal"
+            style={{ backgroundColor: '#f5f5f5' }}
+          >
+            <Menu.Item key="browse">
+              Browse Pictures
+              <Link to="/" />
+            </Menu.Item>
+            <Menu.Item key="upload">
+              Upload Pictures
+              <Link to="/upload" />
+            </Menu.Item>
+          </Menu>
+          <Avatar
+            style={{ backgroundColor: '#000000' }}
+            icon={<UserOutlined />}
+          />
+        </Space>
+      );
+    }
+  }
   // Handling Click for Navbar items
 
   handleClick = (e) => {
-    console.log('click ', e);
     this.setState({
       current: e.key,
     });
@@ -52,7 +60,7 @@ class Navbar extends Component {
     return (
       <div className={Classes.Navbar}>
         <h3 className={Classes.Logo}>SURFPICPROJECT</h3>
-        {this.buttons}
+        {this.buttonsDisplay}
       </div>
     );
   }

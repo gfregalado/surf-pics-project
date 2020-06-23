@@ -40,7 +40,6 @@ class Signup extends Component {
   render() {
     return (
       <React.Fragment>
-        <h3 className={Classes.Logo}>SURFPICPROJECT</h3>
         <div className={Classes.SignupBox}>
           <div className={Classes.Form}>
             <h2>Ready to join the Community?</h2>
