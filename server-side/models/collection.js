@@ -36,10 +36,7 @@ const collectionSchema = new mongoose.Schema({
     trim: true,
     enum: ['surf', 'bodyboard', 'wakeboard', 'kite surf'],
   },
-  timestamps: {
-    createdAt: 'dateCreated',
-    updatedAt: 'dateUpdated',
-  },
+  //   timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },
 });
 
 const Collection = mongoose.model('Collection', collectionSchema);

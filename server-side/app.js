@@ -21,6 +21,7 @@ app.use(cookieParser());
 
 app.use('/', indexRouter);
 app.use('/api', require('./routes/authentication'));
+app.use('/api', require('./routes/imagekitAuthentication'));
 
 // Catch missing routes and forward to error handler
 app.use((req, res, next) => {

@@ -30,10 +30,10 @@ const userSchema = new mongoose.Schema({
     enum: ['surfer', 'photographer'],
     trim: true,
   },
-  timestamps: {
-    createdAt: 'dateCreated',
-    updatedAt: 'dateUpdated',
-  },
+  // timestamps: {
+  //   createdAt: 'dateCreated',
+  //   updatedAt: 'dateUpdated',
+  // },
 });
 
 const User = mongoose.model('User', userSchema);

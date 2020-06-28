@@ -1,16 +1,8 @@
 import React, { Component } from 'react';
-import {
-  Form,
-  Select,
-  DatePicker,
-  Checkbox,
-  Row,
-  Col,
-  Button,
-  Upload,
-} from 'antd';
+import { Form, Select, DatePicker, Row, Col, Button, Upload } from 'antd';
 
-import { upload } from '../../Services/PhotosUpload';
+// import { upload } from '../../Services/PhotosUpload';
+// import { IKContext, IKUpload } from 'imagekitio-react';
 
 import { UploadOutlined } from '@ant-design/icons';
 import Classes from './Upload.module.css';
@@ -38,11 +30,11 @@ class uploadForm extends Component {
     }
   };
 
-  // handleInputChange = ({ target: { name, value } }) => {
-  //   this.setState({
-  //     [name]: value,
-  //   });
-  // };
+  imagekit = {
+    publicKey: `${process.env.REACT_APP_IMAGEKIT_API_KEY}`,
+    urlEndpoint: `${process.env.REACT_APP_IMAGEKIT_URLENDPOINT}`,
+    authenticationEndpoint: `${process.env.REACT_APP_IMAGEKIT_AUTHENTICATIONENDPOINT}`,
+  };
 
   render() {
     return (
@@ -52,10 +44,8 @@ class uploadForm extends Component {
           <Form
             name="upload-form"
             onFinish={this.onFinish}
-            // onValuesChange={(e) => this.handleInputChange(e)}
             layout="horizontal"
             {...layout}
-            // validateMessages={validateMessages}
           >
             <Row>
               <Row>
@@ -96,7 +86,6 @@ class uploadForm extends Component {
                   <Form.Item
                     name="period"
                     label="Period"
-                    hasFeedback
                     rules={[
                       {
                         required: true,
@@ -115,7 +104,8 @@ class uploadForm extends Component {
               <Form.Item name="photos">
                 <Upload
                   multiple
-                  // action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                  action="https://upload.imagekit.io/api/v1/files/upload"
+                  data={this.imagekit}
                   listType="picture"
                   defaultFileList={[...this.state.fileList]}
                 >
