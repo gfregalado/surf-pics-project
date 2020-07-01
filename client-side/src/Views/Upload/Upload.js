@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Select, DatePicker, Row, Col, Button, Upload } from 'antd';
 
-// import { upload } from '../../Services/PhotosUpload';
-// import { IKContext, IKUpload } from 'imagekitio-react';
+import { upload } from '../../Services/PhotosUpload';
 
 import { UploadOutlined } from '@ant-design/icons';
 import Classes from './Upload.module.css';
@@ -19,21 +18,29 @@ class uploadForm extends Component {
     super(props);
     this.state = {
       fileList: [],
+      uploading: false,
     };
   }
 
   onFinish = async (values) => {
-    try {
-      console.log(values);
-    } catch (error) {
-      alert(error);
-    }
+    const { fileList } = this.state;
+    const urls = await upload(fileList);
+    console.log(urls);
   };
 
-  imagekit = {
-    publicKey: `${process.env.REACT_APP_IMAGEKIT_API_KEY}`,
-    urlEndpoint: `${process.env.REACT_APP_IMAGEKIT_URLENDPOINT}`,
-    authenticationEndpoint: `${process.env.REACT_APP_IMAGEKIT_AUTHENTICATIONENDPOINT}`,
+  handlePreview = (file) => {
+    this.setState({
+      previewImage: file.thumbUrl,
+      previewVisible: true,
+    });
+  };
+
+  handleBeforeUpload = (file) => {
+    console.log('file', file);
+    this.setState((previousState) => ({
+      fileList: [...previousState.fileList, file],
+    }));
+    return false;
   };
 
   render() {
@@ -55,7 +62,7 @@ class uploadForm extends Component {
                     label="Location"
                     rules={[
                       {
-                        required: true,
+                        required: false,
                         message: 'Please select where these pictures are',
                       },
                     ]}
@@ -74,7 +81,7 @@ class uploadForm extends Component {
                     label="Date"
                     rules={[
                       {
-                        required: true,
+                        required: false,
                         message: 'Please select where these pictures are',
                       },
                     ]}
@@ -88,7 +95,7 @@ class uploadForm extends Component {
                     label="Period"
                     rules={[
                       {
-                        required: true,
+                        required: false,
                         message: 'Please select where these pictures are',
                       },
                     ]}
@@ -104,13 +111,12 @@ class uploadForm extends Component {
               <Form.Item name="photos">
                 <Upload
                   multiple
-                  action="https://upload.imagekit.io/api/v1/files/upload"
-                  data={this.imagekit}
+                  onPreview={this.handlePreview}
+                  beforeUpload={this.handleBeforeUpload}
                   listType="picture"
-                  defaultFileList={[...this.state.fileList]}
                 >
                   <Button>
-                    <UploadOutlined /> Upload
+                    <UploadOutlined /> Add Files
                   </Button>
                 </Upload>
               </Form.Item>

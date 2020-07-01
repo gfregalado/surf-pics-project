@@ -1,22 +1,34 @@
-const upload = (body) => {
-  const form = new FormData();
-  form.append('location', body.name);
-  form.append('sport', body.sport);
-  form.append('date', body.date);
-  form.append('period', body.period);
-  form.append('photos', body.photos);
+import ImageKit from 'imagekit-javascript';
 
-  console.log(form);
-  //   return baseAuthenticationService
-  //     .post('/uploadphotos', form)
-  //     .then((response) => {
-  //       const data = form
-  //       // const user = data.user;
-  //       console.log(Promise.resolve(data));
-  //     })
-  //     .catch((error) => {
-  //       console.log(Promise.reject(data));
-  //     });
+let imagekit = new ImageKit({
+  publicKey: `${process.env.REACT_APP_IMAGEKIT_API_KEY}`,
+  urlEndpoint: `${process.env.REACT_APP_IMAGEKIT_URLENDPOINT}`,
+  authenticationEndpoint: `${process.env.REACT_APP_IMAGEKIT_AUTHENTICATIONENDPOINT}`,
+});
+
+const uploadToImagekit = (data) =>
+  new Promise((resolve, reject) => {
+    imagekit.upload(data, function (err, result) {
+      if (!err) {
+        resolve(result);
+      } else {
+        reject(err);
+      }
+    });
+  });
+
+const upload = async (fileList) => {
+  const results = [];
+  for (const file of fileList) {
+    const result = await uploadToImagekit({
+      file,
+      fileName: file.name,
+    });
+    console.log('results', result);
+    results.push(result);
+  }
+  // return results;
+  console.log(results.map(({ url }) => url));
 };
 
 export { upload };
