@@ -23,12 +23,13 @@ const upload = async (fileList) => {
     const result = await uploadToImagekit({
       file,
       fileName: file.name,
+      folder: '/surf_pics_project/user_uploads',
     });
     console.log('results', result);
     results.push(result);
   }
   // return results;
-  console.log(results.map(({ url }) => url));
+  return results.map(({ url }) => url);
 };
 
 export { upload };
