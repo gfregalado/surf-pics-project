@@ -51,6 +51,32 @@ class uploadForm extends Component {
     return false;
   };
 
+  handleRemove = (file) => {
+    console.log('remove', file);
+    let index = this.state.fileList.findIndex((item) => item.uid === file.uid);
+    //
+    /*
+    const files = [...this.state.fileList];
+    files.splice(index, 1);
+    this.setState({
+      fileList: files,
+    });
+    */
+
+    // Alt
+    this.setState((currentState) => {
+      return {
+        fileList: currentState.fileList.slice(index, index + 1),
+      };
+    });
+
+    /*
+    this.setState(({ fileList }) => ({
+      fileList: fileList.slice(index, index + 1),
+    }));
+    */
+  };
+
   layout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 16 },
@@ -160,6 +186,7 @@ class uploadForm extends Component {
                     onPreview={this.handlePreview}
                     beforeUpload={this.handleBeforeUpload}
                     listType="picture-card"
+                    onRemove={this.handleRemove}
                   >
                     <Button>
                       <UploadOutlined /> Add Files
