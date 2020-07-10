@@ -7,8 +7,7 @@ import {
   Col,
   Button,
   Upload,
-  Empty,
-  Checkbox,
+  Modal,
 } from 'antd';
 
 import { upload } from '../../Services/PhotosUpload';
@@ -24,8 +23,8 @@ class uploadForm extends Component {
     super(props);
     this.state = {
       fileList: [],
-      uploading: false,
       uploaded: false,
+      visible: false,
     };
   }
 
@@ -36,6 +35,31 @@ class uploadForm extends Component {
   };
 
   handlePreview = (file) => {
+    this.setState({
+      previewImage: file.thumbUrl,
+      previewVisible: true,
+    });
+  };
+
+  handleOk = (e) => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  };
+
+  handleCancel = (e) => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  };
+
+  showModal = (file) => {
+    this.setState({
+      visible: true,
+    });
+    console.log(file);
     this.setState({
       previewImage: file.thumbUrl,
       previewVisible: true,
@@ -54,21 +78,18 @@ class uploadForm extends Component {
   handleRemove = (file) => {
     console.log('remove', file);
     let index = this.state.fileList.findIndex((item) => item.uid === file.uid);
-    //
-    /*
     const files = [...this.state.fileList];
     files.splice(index, 1);
     this.setState({
       fileList: files,
     });
-    */
 
     // Alt
-    this.setState((currentState) => {
-      return {
-        fileList: currentState.fileList.slice(index, index + 1),
-      };
-    });
+    // this.setState((currentState) => {
+    //   return {
+    //     fileList: currentState.fileList.slice(index, index + 1),
+    //   };
+    // });
 
     /*
     this.setState(({ fileList }) => ({
@@ -183,7 +204,7 @@ class uploadForm extends Component {
                 <Form.Item name="photos">
                   <Dragger
                     multiple
-                    onPreview={this.handlePreview}
+                    onPreview={this.showModal}
                     beforeUpload={this.handleBeforeUpload}
                     listType="picture-card"
                     onRemove={this.handleRemove}
@@ -197,6 +218,14 @@ class uploadForm extends Component {
             </Col>
           </Row>
         </div>
+        <Modal
+          title="Basic Modal"
+          visible={this.state.visible}
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}
+        >
+          <img src={this.state.previewImage} alt="" />
+        </Modal>
       </React.Fragment>
     );
   }
