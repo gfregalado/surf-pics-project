@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Classes from './Signup.module.css';
 import { Form, Input, Radio, Button } from 'antd';
+import { signUp } from '../../../Services/authentication';
+//import axios from 'axios';
 
 class Signup extends Component {
   state = {
@@ -11,14 +13,9 @@ class Signup extends Component {
 
   onSubmit = async (values) => {
     try {
-      const { email, password, firstName, lastName, userType } = values;
-      this.props.createNewFirebaseUser(
-        email,
-        password,
-        firstName,
-        lastName,
-        userType
-      );
+      const { firstName, lastName, userType, email, password } = values;
+      await signUp(firstName, lastName, userType, email, password);
+      this.props.history.push('/');
     } catch (error) {
       alert(error);
     }

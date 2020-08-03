@@ -1,21 +1,26 @@
 import axios from 'axios';
 
 const baseAuthenticationService = axios.create({
-  baseURL: 'http://localhost:5000/api',
+  baseURL: 'http://localhost:2000/authentication',
 });
 
-const createUser = (email, firstName, lastName, userType) => {
-  baseAuthenticationService
-    .post('/createUser', {
-      email,
+const signUp = (firstName, lastName, userType, email, password) => {
+  return baseAuthenticationService
+    .post('/sign-up', {
       firstName,
       lastName,
       userType,
+      email,
+      password,
     })
-    .then(() => {
-      console.log('USER CREATED SUCCESSFULLY');
+    .then((response) => {
+      const data = response.data;
+      const user = data.user;
+      return Promise.resolve(user);
     })
-    .catch((error) => console.log(error));
+    .catch((error) => {
+      return Promise.reject(error);
+    });
 };
 
-export { createUser };
+export { signUp };

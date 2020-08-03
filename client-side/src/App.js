@@ -24,29 +24,29 @@ class App extends Component {
     firebase.initializeApp(firebaseConfig);
   }
 
-  createNewFirebaseUser = async (
-    email,
-    password,
-    firstName,
-    lastName,
-    userType
-  ) => {
-    try {
-      await firebase
-        .auth()
-        //Creates the user in Firebase
-        .createUserWithEmailAndPassword(email, password)
-        .then(() => {
-          //Creates the user in MongoDB & Updates state
-          createUser(email, firstName, lastName, userType);
-          this.setState({ user: true });
-          this.props.history.push('/');
-        })
-        .catch((error) => console.log(error));
-    } catch (error) {
-      alert(error);
-    }
-  };
+  // createNewFirebaseUser = async (
+  //   email,
+  //   password,
+  //   firstName,
+  //   lastName,
+  //   userType
+  // ) => {
+  //   try {
+  //     await firebase
+  //       .auth()
+  //       //Creates the user in Firebase
+  //       .createUserWithEmailAndPassword(email, password)
+  //       .then(() => {
+  //         //Creates the user in MongoDB & Updates state
+  //         createUser(email, firstName, lastName, userType);
+  //         this.setState({ user: true });
+  //         this.props.history.push('/');
+  //       })
+  //       .catch((error) => console.log(error));
+  //   } catch (error) {
+  //     alert(error);
+  //   }
+  // };
 
   loginFirebaseUser = (email, password) => {
     firebase
