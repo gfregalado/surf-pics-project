@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose');
 
-const userSchema = new mongoose.Schema({
+const schema = new mongoose.Schema({
   name: {
     type: String,
     trim: true,
@@ -30,12 +30,9 @@ const userSchema = new mongoose.Schema({
     enum: ['surfer', 'photographer'],
     trim: true,
   },
-  // timestamps: {
-  //   createdAt: 'dateCreated',
-  //   updatedAt: 'dateUpdated',
-  // },
+  passwordHash: {
+    type: String,
+  },
 });
 
-const User = mongoose.model('User', userSchema);
-
-module.exports = User;
+module.exports = mongoose.model('User', schema);

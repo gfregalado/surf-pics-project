@@ -5,7 +5,6 @@ require('dotenv').config();
 const debug = require('debug')('server-side:server');
 const app = require('./app');
 const mongoose = require('mongoose');
-const cors = require('cors');
 
 const PORT = parseInt(process.env.PORT, 10);
 const URI = process.env.MONGODB_URI;
@@ -57,14 +56,6 @@ const initiate = () => {
   server.on('error', (error) => onError(error));
   server.on('listening', () => onListening(server));
 };
-
-app.use(
-  cors({
-    // credentials: true,
-    origin: ['http://localhost:3000'],
-    Vary: 'Origin',
-  })
-);
 
 mongoose
   .connect(URI, {
