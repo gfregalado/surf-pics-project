@@ -2,11 +2,14 @@ import React from 'react';
 import { Form, Input, Button } from 'antd';
 import Classes from './Login.module.css';
 
+import { signIn } from '../../../Services/authentication';
+
 const Login = (props) => {
   const onSubmit = async (values) => {
     try {
       const { email, password } = values;
-      props.loginFirebaseUser(email, password);
+      await signIn({ email, password });
+      props.history.push('/');
     } catch (error) {
       alert(error);
     }

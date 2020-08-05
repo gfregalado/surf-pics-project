@@ -23,4 +23,28 @@ const signUp = (firstName, lastName, userType, email, password) => {
     });
 };
 
-export { signUp };
+const signIn = (body) => {
+  return baseAuthenticationService
+    .post('/sign-in', body)
+    .then((response) => {
+      const data = response.data;
+      const user = data.user;
+      return Promise.resolve(user);
+    })
+    .catch((error) => {
+      return Promise.reject(error);
+    });
+};
+
+const signOut = () => {
+  return baseAuthenticationService
+    .post('/sign-out')
+    .then((response) => {
+      return Promise.resolve();
+    })
+    .catch((error) => {
+      return Promise.reject(error);
+    });
+};
+
+export { signUp, signIn, signOut };

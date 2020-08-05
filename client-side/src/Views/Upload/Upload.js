@@ -31,7 +31,6 @@ class uploadForm extends Component {
   onFinish = async (values) => {
     const { fileList } = this.state;
     const urls = await upload(fileList);
-    console.log(urls);
   };
 
   handlePreview = (file) => {
@@ -42,14 +41,12 @@ class uploadForm extends Component {
   };
 
   handleOk = (e) => {
-    console.log(e);
     this.setState({
       visible: false,
     });
   };
 
   handleCancel = (e) => {
-    console.log(e);
     this.setState({
       visible: false,
     });
@@ -59,7 +56,6 @@ class uploadForm extends Component {
     this.setState({
       visible: true,
     });
-    console.log(file);
     this.setState({
       previewImage: file.thumbUrl,
       previewVisible: true,
@@ -67,7 +63,6 @@ class uploadForm extends Component {
   };
 
   handleBeforeUpload = (file) => {
-    console.log('file', file);
     this.setState((previousState) => ({
       fileList: [...previousState.fileList, file],
       uploaded: true,
@@ -76,26 +71,12 @@ class uploadForm extends Component {
   };
 
   handleRemove = (file) => {
-    console.log('remove', file);
     let index = this.state.fileList.findIndex((item) => item.uid === file.uid);
     const files = [...this.state.fileList];
     files.splice(index, 1);
     this.setState({
       fileList: files,
     });
-
-    // Alt
-    // this.setState((currentState) => {
-    //   return {
-    //     fileList: currentState.fileList.slice(index, index + 1),
-    //   };
-    // });
-
-    /*
-    this.setState(({ fileList }) => ({
-      fileList: fileList.slice(index, index + 1),
-    }));
-    */
   };
 
   layout = {

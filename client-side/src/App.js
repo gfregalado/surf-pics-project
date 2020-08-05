@@ -6,11 +6,7 @@ import LandingPage from './Views/LandingPage/LandingPage';
 import Signup from './Views/Authentication/Signup/Signup';
 import Login from './Views/Authentication/Login/Login';
 import Upload from './Views/Upload/Upload';
-
-import { firebaseConfig } from './Services/Firebase';
-import firebase from 'firebase';
-
-import { createUser } from './Services/authentication';
+import Browse from './Views/Browse/Browse';
 
 class App extends Component {
   constructor(props) {
@@ -19,46 +15,6 @@ class App extends Component {
       user: null,
     };
   }
-
-  componentDidMount() {
-    firebase.initializeApp(firebaseConfig);
-  }
-
-  // createNewFirebaseUser = async (
-  //   email,
-  //   password,
-  //   firstName,
-  //   lastName,
-  //   userType
-  // ) => {
-  //   try {
-  //     await firebase
-  //       .auth()
-  //       //Creates the user in Firebase
-  //       .createUserWithEmailAndPassword(email, password)
-  //       .then(() => {
-  //         //Creates the user in MongoDB & Updates state
-  //         createUser(email, firstName, lastName, userType);
-  //         this.setState({ user: true });
-  //         this.props.history.push('/');
-  //       })
-  //       .catch((error) => console.log(error));
-  //   } catch (error) {
-  //     alert(error);
-  //   }
-  // };
-
-  loginFirebaseUser = (email, password) => {
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then((resp) => {
-        console.log(resp);
-        this.setState({ user: true });
-        this.props.history.push('/');
-      })
-      .catch((err) => alert(err));
-  };
 
   render() {
     return (
@@ -75,24 +31,18 @@ class App extends Component {
           <Route
             exact
             path="/signup"
-            render={(props) => (
-              <Signup
-                createNewFirebaseUser={this.createNewFirebaseUser}
-                {...props}
-              />
-            )}
+            render={(props) => <Signup {...props} />}
           />
-          <Route
-            exact
-            path="/login"
-            render={(props) => (
-              <Login loginFirebaseUser={this.loginFirebaseUser} {...props} />
-            )}
-          />
+          <Route exact path="/login" render={(props) => <Login {...props} />} />
           <Route
             exact
             path="/upload"
             render={(props) => <Upload {...props} />}
+          />
+          <Route
+            exact
+            path="/browse"
+            render={(props) => <Browse {...props} />}
           />
         </Switch>
       </React.Fragment>
