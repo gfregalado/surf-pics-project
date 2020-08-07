@@ -24,42 +24,12 @@ class uploadForm extends Component {
     this.state = {
       fileList: [],
       uploaded: false,
-      visible: false,
     };
   }
 
   onFinish = async (values) => {
     const { fileList } = this.state;
     const urls = await upload(fileList);
-  };
-
-  handlePreview = (file) => {
-    this.setState({
-      previewImage: file.thumbUrl,
-      previewVisible: true,
-    });
-  };
-
-  handleOk = (e) => {
-    this.setState({
-      visible: false,
-    });
-  };
-
-  handleCancel = (e) => {
-    this.setState({
-      visible: false,
-    });
-  };
-
-  showModal = (file) => {
-    this.setState({
-      visible: true,
-    });
-    this.setState({
-      previewImage: file.thumbUrl,
-      previewVisible: true,
-    });
   };
 
   handleBeforeUpload = (file) => {
@@ -79,134 +49,108 @@ class uploadForm extends Component {
     });
   };
 
-  layout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
-  };
-
   render() {
     return (
       <React.Fragment>
         <div className={Classes.FormContainer}>
-          <Row justify="center" gutter={[40, 40]}>
-            <Col span={10}>
-              <Form
-                {...this.layout}
-                name="upload-form"
-                onFinish={this.onFinish}
-                layout="horizontal"
+          <Form name="upload-form" onFinish={this.onFinish} layout="horizontal">
+            <Form.Item
+              name="Spot"
+              label="Surf Spot"
+              rules={[
+                {
+                  required: false,
+                  message: 'Please select where these pictures are',
+                },
+              ]}
+            >
+              <Select placeholder="Please select a country">
+                <Option value="Praia Grande">Portugal</Option>
+              </Select>
+            </Form.Item>
+            <Form.Item
+              name="Spot"
+              label="Surf Spot"
+              rules={[
+                {
+                  required: false,
+                  message: 'Please select where these pictures are',
+                },
+              ]}
+            >
+              <Select placeholder="Please select a country">
+                <Option value="Praia Grande">Praia Grande</Option>
+                <Option value="Guincho">Guincho</Option>
+              </Select>
+            </Form.Item>
+            <Form.Item
+              name="date"
+              label="Date"
+              rules={[
+                {
+                  required: false,
+                  message: 'Please select where these pictures are',
+                },
+              ]}
+            >
+              <DatePicker />
+            </Form.Item>
+
+            <Form.Item
+              name="period"
+              label="Period"
+              rules={[
+                {
+                  required: false,
+                  message: 'Please select where these pictures are',
+                },
+              ]}
+            >
+              <Select placeholder="Please select a country">
+                <Option value="morning">Morning</Option>
+                <Option value="afternoon">Afternoon</Option>
+                <Option value="full-day">Full day</Option>
+              </Select>
+            </Form.Item>
+
+            <Form.Item
+              name="Watersports"
+              label="Watersports Featured"
+              rules={[
+                {
+                  required: false,
+                  message: 'Please select where these pictures are',
+                },
+              ]}
+            >
+              <Select placeholder="Watersports Options" mode="multiple">
+                <Option value="Praia Grande">Praia Grande</Option>
+                <Option value="Guincho">Guincho</Option>
+              </Select>
+            </Form.Item>
+
+            <Form.Item name="photos">
+              <Dragger
+                multiple
+                beforeUpload={this.handleBeforeUpload}
+                listType="text"
+                onRemove={this.handleRemove}
               >
-                <Form.Item
-                  name="Spot"
-                  label="Surf Spot"
-                  rules={[
-                    {
-                      required: false,
-                      message: 'Please select where these pictures are',
-                    },
-                  ]}
-                >
-                  <Select placeholder="Please select a country">
-                    <Option value="Praia Grande">Portugal</Option>
-                  </Select>
-                </Form.Item>
-                <Form.Item
-                  name="Spot"
-                  label="Surf Spot"
-                  rules={[
-                    {
-                      required: false,
-                      message: 'Please select where these pictures are',
-                    },
-                  ]}
-                >
-                  <Select placeholder="Please select a country">
-                    <Option value="Praia Grande">Praia Grande</Option>
-                    <Option value="Guincho">Guincho</Option>
-                  </Select>
-                </Form.Item>
-                <Form.Item
-                  name="date"
-                  label="Date"
-                  rules={[
-                    {
-                      required: false,
-                      message: 'Please select where these pictures are',
-                    },
-                  ]}
-                >
-                  <DatePicker />
-                </Form.Item>
-
-                <Form.Item
-                  name="period"
-                  label="Period"
-                  rules={[
-                    {
-                      required: false,
-                      message: 'Please select where these pictures are',
-                    },
-                  ]}
-                >
-                  <Select placeholder="Please select a country">
-                    <Option value="morning">Morning</Option>
-                    <Option value="afternoon">Afternoon</Option>
-                    <Option value="full-day">Full day</Option>
-                  </Select>
-                </Form.Item>
-
-                <Form.Item
-                  name="Watersports"
-                  label="Watersports Featured"
-                  rules={[
-                    {
-                      required: false,
-                      message: 'Please select where these pictures are',
-                    },
-                  ]}
-                >
-                  <Select placeholder="Watersports Options" mode="multiple">
-                    <Option value="Praia Grande">Praia Grande</Option>
-                    <Option value="Guincho">Guincho</Option>
-                  </Select>
-                </Form.Item>
-
-                <Button
-                  htmlType="submit"
-                  className="upload-form-button"
-                  type="primary"
-                >
-                  Submit Session
+                <Button>
+                  <UploadOutlined /> Add Files
                 </Button>
-              </Form>
-            </Col>
-            <Col span={14}>
-              <div className={Classes.PhotoBox}>
-                <Form.Item name="photos">
-                  <Dragger
-                    multiple
-                    onPreview={this.showModal}
-                    beforeUpload={this.handleBeforeUpload}
-                    listType="picture-card"
-                    onRemove={this.handleRemove}
-                  >
-                    <Button>
-                      <UploadOutlined /> Add Files
-                    </Button>
-                  </Dragger>
-                </Form.Item>
-              </div>
-            </Col>
-          </Row>
+              </Dragger>
+            </Form.Item>
+
+            <Button
+              htmlType="submit"
+              className="upload-form-button"
+              type="primary"
+            >
+              Submit Session
+            </Button>
+          </Form>
         </div>
-        <Modal
-          title="Basic Modal"
-          visible={this.state.visible}
-          onOk={this.handleOk}
-          onCancel={this.handleCancel}
-        >
-          <img src={this.state.previewImage} alt="" />
-        </Modal>
       </React.Fragment>
     );
   }

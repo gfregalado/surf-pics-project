@@ -1,20 +1,12 @@
 .FormContainer {
-  margin: 40px 60px;
+  width: 40%;
+  margin: 100px 60px;
 }
 
-.FormSection {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.PhotoBox {
-  height: 55vh;
-}
-
-.Data {
-  width: 90vh;
-}
 .ant-upload-list .ant-upload-list-picture {
   overflow-y: scroll;
+}
+
+.ant-upload-list-item-info > span {
+  display: flex;
 }
