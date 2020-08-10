@@ -2,15 +2,19 @@
 
 const mongoose = require('mongoose');
 
-const collectionSchema = new mongoose.Schema({
+const schema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
   },
-  location: {
+  country: {
     type: String,
     required: true,
-    lowercase: true,
+    trim: true,
+  },
+  spot: {
+    type: String,
+    required: true,
     trim: true,
   },
   date: {
@@ -22,23 +26,18 @@ const collectionSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
-    enum: ['morning', 'afternoon'],
+    enum: ['morning', 'afternoon', 'full-day'],
   },
-  sports: {
-    type: String,
+  watersports: {
+    type: Array,
     required: true,
-    trim: true,
-    enum: ['surf', 'bodyboard', 'wakeboard', 'kite surf'],
   },
-  price: {
-    type: Number,
+  imagesUrls: {
+    type: Array,
     required: true,
-    trim: true,
-    enum: ['surf', 'bodyboard', 'wakeboard', 'kite surf'],
   },
+
   //   timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },
 });
 
-const Collection = mongoose.model('Collection', collectionSchema);
-
-module.exports = Collection;
+module.exports = mongoose.model('session', schema);
