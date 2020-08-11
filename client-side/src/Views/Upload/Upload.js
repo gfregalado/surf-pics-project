@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Form, Select, DatePicker, Button, Upload } from 'antd';
 
 import { upload } from '../../Services/PhotosUpload';
-import { uploadSession } from '../../Services/sessionUpload';
+import { uploadSession } from '../../Services/sessions';
 
 import { UploadOutlined } from '@ant-design/icons';
 import Classes from './Upload.module.css';
