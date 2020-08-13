@@ -7,12 +7,25 @@
 }
 
 .FormContainer {
-  width: 40em;
-  margin: auto 60px;
+  position: relative;
+  width: 40%;
+  margin: 1% 5%;
   padding: 40px;
   background-color: whitesmoke;
 }
 
 .ant-upload-list .ant-upload-list-picture {
   overflow-y: scroll;
+}
+.loader {
+  z-index: 1;
+  position: absolute;
+  background-color: rgba(228, 228, 228, 0.5);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

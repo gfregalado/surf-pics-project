@@ -14,7 +14,7 @@ const Filter = () => {
       >
         <Form.Item
           className={Classes.itemMedium}
-          name="Spot"
+          name="country"
           label="Country"
           rules={[
             {
@@ -29,7 +29,7 @@ const Filter = () => {
         </Form.Item>
         <Form.Item
           className={Classes.itemMedium}
-          name="Spot"
+          name="spot"
           label="Surf Spot"
           rules={[
             {
@@ -77,7 +77,7 @@ const Filter = () => {
 
         <Form.Item
           className={Classes.itemLarge}
-          name="Watersports"
+          name="watersports"
           label="Watersports Featured"
           rules={[
             {
@@ -87,8 +87,12 @@ const Filter = () => {
           ]}
         >
           <Select placeholder="Watersports Options" mode="multiple">
-            <Option value="Praia Grande">Praia Grande</Option>
-            <Option value="Guincho">Guincho</Option>
+            <Option value="Bodyboard">Bodyboard</Option>
+            <Option value="Kite Surf">Kite Surf</Option>
+            <Option value="Standup Paddle">Standup Paddle</Option>
+            <Option value="Surf">Surf</Option>
+            <Option value="Wind Surf">Wind Surf</Option>
+            <Option value="Other">Other</Option>
           </Select>
         </Form.Item>
       </Form>

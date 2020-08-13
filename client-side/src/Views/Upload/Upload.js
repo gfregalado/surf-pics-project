@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Select, DatePicker, Button, Upload } from 'antd';
+import MoonLoader from 'react-spinners/MoonLoader';
 
 import { upload } from '../../Services/PhotosUpload';
 import { uploadSession } from '../../Services/sessions';
@@ -16,14 +17,17 @@ class uploadForm extends Component {
     this.state = {
       fileList: [],
       uploaded: false,
+      loading: false,
     };
   }
 
   onFinish = async (values) => {
+    this.setState({ loading: true });
     const { fileList } = this.state;
     const imagesUrls = await upload(fileList);
     const session = { ...values, imagesUrls };
-    uploadSession(session);
+    await uploadSession(session);
+    this.props.history.push('/browse');
   };
 
   handleBeforeUpload = (file) => {
@@ -48,6 +52,18 @@ class uploadForm extends Component {
       <React.Fragment>
         <div className={Classes.background}>
           <div className={Classes.FormContainer}>
+            {this.state.loading ? (
+              <div
+                className={Classes.loader}
+                style={{ display: this.visibility }}
+              >
+                <MoonLoader
+                  color={'#000'}
+                  loading={this.state.loading}
+                  css={{ marginTop: '50%' }}
+                />
+              </div>
+            ) : null}
             <Form
               name="upload-form"
               onFinish={this.onFinish}
@@ -64,7 +80,7 @@ class uploadForm extends Component {
                 ]}
               >
                 <Select placeholder="Please select a country">
-                  <Option value="Praia Grande">Portugal</Option>
+                  <Option value="Portugal">Portugal</Option>
                 </Select>
               </Form.Item>
               <Form.Item
