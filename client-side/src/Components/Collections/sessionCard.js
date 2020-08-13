@@ -1,4 +1,6 @@
 import React from 'react';
+import moment from 'moment';
+
 import { Card } from 'antd';
 
 import Classes from './sessionCard.module.css';
@@ -10,11 +12,20 @@ const SessionCards = (props) => {
     <div className={Classes.container}>
       {props.sessions.map((session) => (
         <Card
-          hoverable
-          style={{ width: 270, margin: '20px auto' }}
-          cover={<img alt="session image" src={session.imagesUrls[0]} />}
+          className={Classes.card}
+          style={{ width: 300 }}
+          cover={
+            <img alt="example" src={session.imagesUrls[0]} height="170px" />
+          }
         >
-          <Meta title="sss" description="sdasd" />
+          <Meta
+            title={`${session.country}, ${session.spot}`}
+            description={`${moment(session.date).format(
+              'dddd, MMMM Do YYYY'
+            )} ${
+              session.period.charAt(0).toUpperCase() + session.period.slice(1)
+            }`}
+          />
         </Card>
       ))}
     </div>

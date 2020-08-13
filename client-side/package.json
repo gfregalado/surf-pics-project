@@ -13,10 +13,12 @@
     "craco-less": "^1.17.0",
     "dotenv": "^8.2.0",
     "imagekit-javascript": "^1.2.3",
+    "moment": "^2.27.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1"
+    "react-scripts": "^3.4.2",
+    "react-spinners": "^0.9.0"
   },
   "scripts": {
     "start": "craco start",
