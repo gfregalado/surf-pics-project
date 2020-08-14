@@ -12,6 +12,7 @@ const SessionCards = (props) => {
     <div className={Classes.container}>
       {props.sessions.map((session) => (
         <Card
+          key={session._id}
           className={Classes.card}
           style={{ width: 300 }}
           cover={
@@ -20,11 +21,15 @@ const SessionCards = (props) => {
         >
           <Meta
             title={`${session.country}, ${session.spot}`}
-            description={`${moment(session.date).format('dddd, MMMM Do YYYY')}${
-              session.period.charAt(0).toUpperCase() + session.period.slice(1)
-            }`}
+            description={`${moment(session.date).format('dddd, MMMM Do YYYY')}`}
           />
-          <Tag color="#d1ddd6">Surf</Tag>
+          <small>
+            {session.period.charAt(0).toUpperCase() + session.period.slice(1)}
+          </small>
+          <br></br>
+          {session.watersports.map((tag) => (
+            <Tag color="#d1ddd6">{tag}</Tag>
+          ))}
         </Card>
       ))}
     </div>

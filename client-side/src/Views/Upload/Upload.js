@@ -26,6 +26,7 @@ class uploadForm extends Component {
     const { fileList } = this.state;
     const imagesUrls = await upload(fileList);
     const session = { ...values, imagesUrls };
+    console.log(session);
     await uploadSession(session);
     this.props.history.push('/browse');
   };
