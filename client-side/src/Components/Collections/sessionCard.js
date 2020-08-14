@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 
-import { Card } from 'antd';
+import { Card, Tag } from 'antd';
 
 import Classes from './sessionCard.module.css';
 
@@ -20,12 +20,11 @@ const SessionCards = (props) => {
         >
           <Meta
             title={`${session.country}, ${session.spot}`}
-            description={`${moment(session.date).format(
-              'dddd, MMMM Do YYYY'
-            )} ${
+            description={`${moment(session.date).format('dddd, MMMM Do YYYY')}${
               session.period.charAt(0).toUpperCase() + session.period.slice(1)
             }`}
           />
+          <Tag color="#d1ddd6">Surf</Tag>
         </Card>
       ))}
     </div>

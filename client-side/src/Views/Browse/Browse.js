@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SessionCards from '../../Components/Collections/sessionCard';
 import Filter from '../../Components/Filters/Filter';
+import { Pagination } from 'antd';
 
 import { listSessions } from '../../Services/sessions';
 
@@ -37,6 +38,12 @@ class Browse extends Component {
         <div style={{ width: '90%', margin: 'auto' }}>
           <Filter></Filter>
           <SessionCards sessions={this.state.sessions} />
+          <Pagination
+            defaultCurrent={1}
+            total={200}
+            showSizeChanger={false}
+            style={{ margin: '50px' }}
+          />
         </div>
       </React.Fragment>
     );

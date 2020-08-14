@@ -3,6 +3,7 @@ import Classes from './Navbar.module.css';
 import { Button, Space, Avatar, Menu } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import Logo from '../../Assets/Images/Group 1.svg';
 
 class Navbar extends Component {
   state = {
@@ -58,8 +59,10 @@ class Navbar extends Component {
   render() {
     return (
       <div className={Classes.Navbar}>
-        <h3 className={Classes.Logo}>SURFPICPROJECT</h3>
-        {this.buttonsDisplay}
+        <div className={Classes.Logo}>
+          <img src={Logo} alt="TOTORA" width="52%" />
+        </div>
+        <div>{this.buttonsDisplay}</div>
       </div>
     );
   }

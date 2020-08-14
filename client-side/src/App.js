@@ -8,6 +8,8 @@ import Login from './Views/Authentication/Login/Login';
 import Upload from './Views/Upload/Upload';
 import Browse from './Views/Browse/Browse';
 
+import { sessionPersist } from './Services/authentication';
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -15,6 +17,33 @@ class App extends Component {
       user: null,
     };
   }
+
+  updateUser = (user) => {
+    const { email } = user;
+    window.sessionStorage.setItem('userEmail', email);
+    this.setState({
+      user,
+    });
+  };
+
+  checkUser() {
+    const email = window.sessionStorage.getItem('userEmail');
+    if (email) {
+      sessionPersist(email).then((user) => {
+        this.setState({
+          user,
+        });
+      });
+    }
+  }
+
+  // componentDidMount() {
+  //   this.checkUser();
+  // }
+
+  // componentDidUpdate() {
+  //   if (this.state.user === null) this.checkUser();
+  // }
 
   render() {
     return (
@@ -31,9 +60,17 @@ class App extends Component {
           <Route
             exact
             path="/signup"
-            render={(props) => <Signup {...props} />}
+            render={(props) => (
+              <Signup updateUser={this.updateUser} {...props} />
+            )}
           />
-          <Route exact path="/login" render={(props) => <Login {...props} />} />
+          <Route
+            exact
+            path="/login"
+            render={(props) => (
+              <Login updateUser={this.updateUser} {...props} />
+            )}
+          />
           <Route
             exact
             path="/upload"

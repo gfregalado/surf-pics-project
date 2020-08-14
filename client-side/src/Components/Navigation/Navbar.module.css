@@ -14,11 +14,6 @@
   display: none;
 }
 
-.Logo {
-  width: 100%;
-  margin: auto;
-}
-
 @media screen and (min-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
   .Navbar {
     width: 95%;
@@ -34,6 +29,8 @@
   }
 
   .Logo {
-    width: 50%;
+    display: flex;
+    align-items: flex-start;
+    width: 13%;
   }
 }

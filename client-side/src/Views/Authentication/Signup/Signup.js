@@ -2,19 +2,25 @@ import React, { Component } from 'react';
 import Classes from './Signup.module.css';
 import { Form, Input, Radio, Button } from 'antd';
 import { signUp } from '../../../Services/authentication';
-//import axios from 'axios';
 
 class Signup extends Component {
-  state = {
-    userType: 'surfer',
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      userType: 'surfer',
+    };
+  }
 
   // ========================== Handles form input changes & submission  ==========================
 
   onSubmit = async (values) => {
     try {
       const { firstName, lastName, userType, email, password } = values;
-      await signUp(firstName, lastName, userType, email, password);
+      await signUp(firstName, lastName, userType, email, password).then(
+        (user) => {
+          this.props.updateUser(user);
+        }
+      );
       this.props.history.push('/');
     } catch (error) {
       alert(error);

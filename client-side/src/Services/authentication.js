@@ -47,4 +47,14 @@ const signOut = () => {
     });
 };
 
-export { signUp, signIn, signOut };
+const sessionPersist = (email) => {
+  return baseAuthenticationService
+    .get(`/me?email=${email}`)
+    .then((response) => {
+      const data = response.data;
+      const user = data.user;
+      return Promise.resolve(user);
+    });
+};
+
+export { signUp, signIn, signOut, sessionPersist };

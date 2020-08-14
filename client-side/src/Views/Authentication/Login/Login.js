@@ -8,7 +8,9 @@ const Login = (props) => {
   const onSubmit = async (values) => {
     try {
       const { email, password } = values;
-      await signIn({ email, password });
+      await signIn({ email, password }).then((user) => {
+        props.updateUser(user);
+      });
       props.history.push('/');
     } catch (error) {
       alert(error);
