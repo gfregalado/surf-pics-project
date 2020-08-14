@@ -15,7 +15,7 @@ router.post('/session', (req, res, next) => {
     spot,
     date,
     period,
-    Watersports,
+    watersports,
     imagesUrls,
   } = req.body;
 
@@ -25,7 +25,7 @@ router.post('/session', (req, res, next) => {
     spot,
     date,
     period,
-    Watersports,
+    watersports,
     imagesUrls,
   })
     .then((session) => {
@@ -41,6 +41,7 @@ router.post('/session', (req, res, next) => {
 router.get('/session', (req, res, next) => {
   Session.find()
     .sort({ date: -1 })
+    .limit(8)
     .then((sessions) => {
       console.log(sessions);
       res.json({
